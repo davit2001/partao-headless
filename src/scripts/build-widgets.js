@@ -14,4 +14,7 @@ build({
     'process.env': '{}',
     'process': '{}',
   },
-})
+}).catch((e) => {
+  console.error('❌ Widget build failed:', e);
+  process.exit(1);
+});
