@@ -12,5 +12,6 @@ build({
   define: {
     'process.env.NODE_ENV': '"production"',
     'process.env': '{}',
+    'process': '{}',
   },
 })
