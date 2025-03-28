@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run build:widgets && next build",
-    "build:widgets": "cd src/ui-widgets && npm install && vite build && cp src/ui-widgets/dist/ui.js src/ui-widgets/public/ui.js",
+    "build:widgets": "cd src/ui-widgets && yarn && yarn build && cp dist/ui.js public/ui.js",
     "start": "next start",
     "lint": "next lint"
   },
