@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && yarn run build:widgets",
-    "build:widgets": "node src/scripts/build-widgets.js",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
