@@ -13,10 +13,10 @@ const CheckoutCount = () => {
       setCount(event.detail.itemCount);
     };
 
-    window.addEventListener('magento:checkout:count', handler);
+    window.addEventListener('magento:cartUpdated', handler);
 
     return () => {
-      window.removeEventListener('magento:checkout:count', handler);
+      window.removeEventListener('magento:cartUpdated', handler);
     }
   }, []);
 
