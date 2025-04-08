@@ -2,6 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import replace from '@rollup/plugin-replace';
 
 export default {
   input: 'sdk/index.ts',
@@ -12,6 +13,11 @@ export default {
     sourcemap: true,
   },
   plugins: [
+    replace({
+      preventAssignment: true,
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env': JSON.stringify({}),
+    }),
     peerDepsExternal(),
     resolve({
       extensions: ['.js', '.ts', '.tsx'],
