@@ -6,7 +6,7 @@ const CheckoutCount = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const addToCartButtons = document.querySelectorAll('.product-item-info .action.tocart');
+    const addToCartButtons = document.querySelectorAll('.action.tocart');
     console.log('addToCartButtons', addToCartButtons)
     addToCartButtons.forEach((button) => {
       button.addEventListener('click', () => {
