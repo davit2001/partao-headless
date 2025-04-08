@@ -8,7 +8,7 @@ export default {
   input: 'sdk/index.ts',
   output: {
     file: 'public/sdk/partao-sdk.js',
-    format: 'umd',
+    format: 'iife',
     name: 'PartaoSDK',
     sourcemap: true,
   },
