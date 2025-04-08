@@ -1,6 +1,13 @@
 import { renderHeader } from './render';
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+declare global {
+  interface Window {
+    PartaoSDK: {
+      renderHeader: typeof renderHeader;
+    };
+  }
+}
+
+window.PartaoSDK = {
   renderHeader,
 };
