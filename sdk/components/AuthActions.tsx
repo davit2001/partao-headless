@@ -13,7 +13,7 @@ const AuthActions = () => {
         return res.json();
       })
       .then(user => {
-        console.log('✅ Logged in as', user.firstname);
+        console.log('✅ Logged in as', user);
         setIsLoggedIn(true);
       })
       .catch((err) => {
@@ -22,7 +22,7 @@ const AuthActions = () => {
       });
   }, []);
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     return (
       <div className="flex items-center justify-center">
         <a className="text-4xl font-bold" href="/customer/account/login/">Sign in</a>
