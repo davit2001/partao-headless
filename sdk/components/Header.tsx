@@ -1,5 +1,6 @@
 import React from "react";
 import CheckoutCount from './CheckoutCount';
+import AuthActions from './AuthActions';
 
 const Header = () => (
   <header>
@@ -7,6 +8,7 @@ const Header = () => (
     <nav>
       <a href="/public" style={{ color: "white", marginRight: "1rem" }}>Home</a>
       <CheckoutCount />
+      <AuthActions />
     </nav>
   </header>
 );
