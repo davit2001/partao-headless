@@ -28,6 +28,31 @@ const CheckoutCount = () => {
     }
   }, []);
 
+  useEffect(() => {
+    fetch('https://dev4.partao.com/rest/V1/integration/customer/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: 'davith@partao.com',
+        password: 'Test1234!'
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch token');
+        }
+        return response.json();
+      })
+      .then(token => {
+        console.log('Customer token:', token);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
+
   return (
     <div className="flex items-center justify-center h-screen">
       <h1 className="text-4xl font-bold">Checkout Count {count}</h1>
