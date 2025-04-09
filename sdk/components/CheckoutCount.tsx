@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const CheckoutCount = () => {
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const addToCartButtons = document.querySelectorAll('.action.tocart');
-    console.log('addToCartButtons', addToCartButtons)
-    addToCartButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        setCount(prevState =>  prevState + 1);
-      });
-    });
-  }, []);
+  const onTestButtonClick = useCallback(() =>  {
+    console.log('onTestButtonClick')
+    window.dispatchEvent(new CustomEvent('cartUpdated', {
+      detail: { itemCount: count + 1 }
+    }));
+  }, [count]);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -21,10 +18,10 @@ const CheckoutCount = () => {
       setCount(event.detail.itemCount);
     };
 
-    window.addEventListener('magento:cartUpdated', handler);
+    window.addEventListener('cartUpdated', handler);
 
     return () => {
-      window.removeEventListener('magento:cartUpdated', handler);
+      window.removeEventListener('cartUpdated', handler);
     }
   }, []);
 
@@ -65,7 +62,7 @@ const CheckoutCount = () => {
     <div className="flex items-center justify-center h-screen">
       <h1 className="text-4xl font-bold">Checkout Count {count}</h1>
       <div className="product-item-actions">
-        <button className="action tocart primary">test button</button>
+        <button className="test-button" onClick={onTestButtonClick}>test button</button>
       </div>
     </div>
   );
