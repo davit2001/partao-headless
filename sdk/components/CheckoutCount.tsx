@@ -29,28 +29,36 @@ const CheckoutCount = () => {
   }, []);
 
   useEffect(() => {
-    fetch('https://dev4.partao.com/rest/V1/integration/customer/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: 'davith@partao.com',
-        password: 'Test1234!'
+    const fetchCartItems = async () => {
+      const tokenResponse = await fetch('https://dev4.partao.com/rest/V1/integration/customer/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: 'davith@partao.com',
+          password: 'Test1234!'
+        })
       })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch token');
+
+      if (!tokenResponse.ok) {
+        throw new Error('Failed to fetch token');
+      }
+
+      const token = await tokenResponse.json();
+
+      const itemsResponse = await fetch('https://dev4.partao.com/rest/V1/carts/mine/items', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-        return response.json();
       })
-      .then(token => {
-        console.log('Customer token:', token);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      const items = await itemsResponse.json();
+      console.log('items', items)
+      setCount(items.length);
+    }
+    fetchCartItems()
   }, []);
 
   return (
