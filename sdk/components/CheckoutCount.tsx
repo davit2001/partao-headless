@@ -53,7 +53,6 @@ const CheckoutCount = () => {
       })
       const items = await itemsResponse.json();
       console.log('items', items)
-      setCount(items.length);
     }
     fetchCartItems()
   }, []);
