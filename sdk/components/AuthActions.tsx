@@ -4,22 +4,35 @@ const AuthActions = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('https://dev4.partao.com/rest/V1/customers/me', {
-      credentials: 'include'
-    })
-      .then(res => {
-        console.log('customer info response', res)
-        if (!res.ok) throw new Error('User not logged in');
-        return res.json();
-      })
-      .then(user => {
-        console.log('✅ Logged in as', user);
-        setIsLoggedIn(true);
+    // fetch('https://dev4.partao.com/rest/V1/customers/me', {
+    //   credentials: 'include'
+    // })
+    //   .then(res => {
+    //     console.log('customer info response', res)
+    //     if (!res.ok) throw new Error('User not logged in');
+    //     return res.json();
+    //   })
+    //   .then(user => {
+    //     console.log('✅ Logged in as', user);
+    //     setIsLoggedIn(true);
+    //   })
+    //   .catch((err) => {
+    //     console.log('❌ Not logged in', err.message);
+    //     setIsLoggedIn(false);
+    //   });
+
+    fetch('https://dev4.partao.com/partao/customer/status', {
+      credentials: 'include',
+    }).then((res) => res.json())
+      .then((data) => {
+        console.log('customer status response', data);
+        setIsLoggedIn(data?.isLoggedIn || false);
       })
       .catch((err) => {
         console.log('❌ Not logged in', err.message);
         setIsLoggedIn(false);
       });
+
   }, []);
 
   if (!isLoggedIn) {
